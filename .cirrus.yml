@@ -22,7 +22,7 @@ mac_test_task:
   osx_instance:
     image: mojave-base
   env:
-    PATH: "$HOME/miniconda/bin:$PATH";
+    PATH: "$HOME/miniconda/bin:$PATH"
     matrix:
       - PYTHON: "3.6"
       - PYTHON: "3.7"
