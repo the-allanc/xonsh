@@ -391,6 +391,8 @@ class XonshStyle(Style):
                 value = "default"
                 XSH.env["XONSH_COLOR_STYLE"] = value
         cmap = STYLES[value]
+
+        import ipdb; ipdb.set_trace()
         if value == "default":
             self._smap = XONSH_BASE_STYLE.copy()
         else:
@@ -539,8 +541,9 @@ def register_custom_pygments_style(
     -------
     style : The ``pygments.Style`` subclass created
     """
-    base_style = get_style_by_name(base)
-    custom_styles = base_style.styles.copy()
+    base_to_use = base or 'default'
+    base_style = get_style_by_name(base_to_use)
+    custom_styles = (base_style.styles if base else XONSH_BASE_STYLE).copy()
 
     for token, value in _tokenize_style_dict(styles).items():
         custom_styles[token] = value
@@ -571,7 +574,7 @@ def register_custom_pygments_style(
 
     add_custom_style(name, style)
 
-    cmap = pygments_style_by_name(base).copy()
+    cmap = pygments_style_by_name(base_to_use).copy()
 
     # replace colors in color map if found in styles
     for token in cmap.keys():

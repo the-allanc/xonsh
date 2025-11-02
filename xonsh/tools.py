@@ -2141,7 +2141,7 @@ def register_custom_style(
     # register ANSI colors
     from xonsh.ansi_colors import register_custom_ansi_style
 
-    register_custom_ansi_style(name, styles, base)
+    register_custom_ansi_style(name, styles, base or "default")
 
     return style
 
